@@ -58,6 +58,7 @@ public class a1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        int a;
         return inflater.inflate(R.layout.fragment_a1, container, false);
     }
 }
