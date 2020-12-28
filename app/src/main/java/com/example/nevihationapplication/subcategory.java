@@ -1,15 +1,12 @@
 package com.example.nevihationapplication;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -44,7 +41,7 @@ public class subcategory extends AppCompatActivity {
         t6=findViewById(R.id.text32);
 
         s=new subData(this);
-    subDataIn=new singleDatabase(this);
+    //subDataIn=new singleDatabase(this);
 
 
         int num4=5;

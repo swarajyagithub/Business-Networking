@@ -7,17 +7,17 @@ class ItemModelPost {
     private String quotation;
     private String postdata;
     private  String postimage;
-    private String pShowTime1;
-    private  String pShowTime2;
+   // private String pShowTime1;
+    //private  String pShowTime2;
 
-    public ItemModelPost(String profilepic, String name, String quotation, String postdata, String postimage, String pShowTime1, String pShowTime2) {
+    public ItemModelPost(String profilepic, String name, String quotation, String postdata, String postimage) {
         this.profilepic = profilepic;
         this.name = name;
         this.quotation = quotation;
         this.postdata = postdata;
         this.postimage = postimage;
-        this.pShowTime1 = pShowTime1;
-        this.pShowTime2 = pShowTime2;
+      //  this.pShowTime1 = pShowTime1;
+      //  this.pShowTime2 = pShowTime2;
     }
 
     public String getProfilepic() {
@@ -60,19 +60,5 @@ class ItemModelPost {
         this.postimage = postimage;
     }
 
-    public String getpShowTime1() {
-        return pShowTime1;
-    }
 
-    public void setpShowTime1(String pShowTime1) {
-        this.pShowTime1 = pShowTime1;
-    }
-
-    public String getpShowTime2() {
-        return pShowTime2;
-    }
-
-    public void setpShowTime2(String pShowTime2) {
-        this.pShowTime2 = pShowTime2;
-    }
 }

@@ -59,7 +59,7 @@
               android:layout_margin="5dp"
               android:layout_gravity="center_horizontal"
               >
-              <android.support.v7.widget.CardView
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   android:id="@+id/cardagri"
@@ -88,9 +88,9 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
+              </androidx.cardview.widget.CardView>
 
-              <android.support.v7.widget.CardView
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardElevation="5dp"
@@ -117,8 +117,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardCornerRadius="15dp"
@@ -145,8 +145,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardCornerRadius="15dp"
@@ -172,8 +172,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardCornerRadius="15dp"
@@ -200,8 +200,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   android:id="@+id/cardIT"
@@ -228,8 +228,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardCornerRadius="15dp"
@@ -256,8 +256,8 @@
                       />
 
 
-              </android.support.v7.widget.CardView>
-              <android.support.v7.widget.CardView
+              </androidx.cardview.widget.CardView>
+              <androidx.cardview.widget.CardView
                   android:layout_width="170dp"
                   android:layout_height="170dp"
                   app:cardCornerRadius="15dp"
@@ -282,7 +282,7 @@
                       android:textColor="@color/black"
                       android:textSize="12sp"
                       />
-              </android.support.v7.widget.CardView>
+              </androidx.cardview.widget.CardView>
 
 
 

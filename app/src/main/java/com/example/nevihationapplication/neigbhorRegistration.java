@@ -19,18 +19,18 @@ public class neigbhorRegistration extends AppCompatActivity {
     TextView text2;
     TextView homep;
 
-    @Override
-    public void onStart() {
-        super.onStart();
+//    @Override
+  //  public void onStart() {
+       // super.onStart();
         //check if usr is logged in
         //if loggedin move to home-page activity
-        sessionmanagement ss=new sessionmanagement(neigbhorRegistration.this);
-        int userId= ss.getSession();
-        if(userId!=-1){
-            Intent intent=new Intent(neigbhorRegistration.this,home_page.class);
-            startActivity(intent);
-        }
-    }
+       // sessionmanagement ss=new sessionmanagement(neigbhorRegistration.this);
+      // int userId= ss.getSession();
+      //  if(userId!=-1){
+      //      Intent intent=new Intent(neigbhorRegistration.this,home_page.class);
+        //    startActivity(intent);
+   //     }
+  //  }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +64,19 @@ public class neigbhorRegistration extends AppCompatActivity {
             }
         });
 
-        homep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user=new User(1,"Nitin");
+       // homep.setOnClickListener(new View.OnClickListener() {
+           // @Override
+           // public void onClick(View v) {
+             //  User user=new User(1,"Nitin");
 
-                sessionmanagement sess=new sessionmanagement(neigbhorRegistration.this);
-                sess.saveSession(user);
-                Intent intent=new Intent(neigbhorRegistration.this,home_page.class);
-                startActivity(intent);
+               // sessionmanagement sess=new sessionmanagement(neigbhorRegistration.this);
 
-            }
-        });
+            //     sess.saveSession(user);
+               // Intent intent=new Intent(neigbhorRegistration.this,home_page.class);
+              //  startActivity(intent);
+
+          //  }
+      //  });
 
 
     }

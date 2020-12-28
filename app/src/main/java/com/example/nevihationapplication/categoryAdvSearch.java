@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class categoryAdvSearch extends AppCompatActivity {
         spinner=findViewById(R.id.spinner);
         gridViewA=findViewById(R.id.gridAdv);
 
-        datadbAdv=new singleDatabase(this);
+       // datadbAdv=new singleDatabase(this);
         arrayNameAdv.clear();
         arrayImgAdv.clear();
 

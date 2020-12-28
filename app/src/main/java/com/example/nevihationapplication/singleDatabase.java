@@ -52,6 +52,17 @@ public class singleDatabase extends SQLiteOpenHelper {
     public static final String col_20P="SHOWTIME1";
     public static final String col_21P="SHOWTIME2";
 
+    //Comment Data:
+
+    public static final String tableComentario= "CommentData1";
+    public static final String com_1P = "ID";
+    public static final String com_2P = "EMAIL";
+    public static final String com_3P = "PINCODE";
+    public static final String com_4P = "POSTDATA";
+    public static final String com_5P = "COMMENT";
+    public static final String com_6P = "IMAGE";
+
+
 
 
     public static final String tableNameNeiPostSentTime = "NeigbhorDataPostTime";
@@ -259,7 +270,7 @@ public class singleDatabase extends SQLiteOpenHelper {
 
     public singleDatabase(Context context) {
 
-        super(context, databaseName1, null, 22);
+        super(context, databaseName1, null, 25);
     }
 
 
@@ -288,7 +299,7 @@ public class singleDatabase extends SQLiteOpenHelper {
         db.execSQL("create table " + tableNamPostRequeteDonneeV + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT,LOCATION TEXT,FORRENT TEXT,DURATION TEXT,BUDGET TEXT,LOCATION2 TEXT,QUOTATION TEXT,IMAGE TEXT,POST TEXT,BUDGET2 TEXT,NAME TEXT,DATE TEXT,TIME TEXT,PINCODE TEXT,IMAGEP TEXT,POSTMONTH TEXT, POSTYEAR TEXT, POSTHH TEXT,SHOWTIME1 TEXT,SHOWTIME2 TEXT)");
         db.execSQL("create table " + tableNameNeiPostSentTime + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,EMAIL TEXT,LYEAR TEXT,LMONTH TEXT,LDATE TEXT,LMINUTES TEXT, LHOUR TEXT)");
         db.execSQL("create table " + tableNameexp + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT)");
-
+        db.execSQL("create table " + tableComentario + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,EMAIL TEXT,PINCODE TEXT,POSTDATA TEXT, COMMENT TEXT,IMAGE PINCODE)");
 
 
     }
@@ -317,7 +328,7 @@ public class singleDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " +tableNameexp);
         db.execSQL("DROP TABLE IF EXISTS " +tableNamPostRequeteDonneeV);
         db.execSQL("DROP TABLE IF EXISTS " +tableNameNeiPostSentTime);
-
+        db.execSQL("DROP TABLE IF EXISTS " +tableComentario);
 
 
 
@@ -980,6 +991,35 @@ public class singleDatabase extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursorF=db.rawQuery("Select * from "+tableNamPostRequeteDonneeV+" where EMAIL=?",new String[]{EMAIL});
+        return cursorF;
+    }
+    public Cursor getPostData(String POST)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursorF=db.rawQuery("Select * from "+tableNamPostRequeteDonneeV+" where POST=?",new String[]{POST});
+        return cursorF;
+    }
+    public boolean insertCommentdata( String EMAIL,String PINCODE,String POSTDATA, String COMMENT,String IMAGE) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(com_2P, EMAIL);
+        contentValues.put(com_3P, PINCODE);
+        contentValues.put(com_4P, POSTDATA);
+        contentValues.put(com_5P, COMMENT);
+        contentValues.put(com_6P, IMAGE);
+
+
+        long result = db.insert(tableComentario, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public Cursor getCommentData(String POSTDATA)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursorF=db.rawQuery("Select * from "+tableComentario+" where POSTDATA=?",new String[]{POSTDATA});
         return cursorF;
     }
 

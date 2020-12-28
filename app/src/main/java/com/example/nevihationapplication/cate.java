@@ -3,9 +3,6 @@ package com.example.nevihationapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -15,8 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class cate extends AppCompatActivity {
 
 
 
-    arrayListName1 mydb2;
+
     ImageURLData3 data3;
     singleDatabase singleData;
 
@@ -96,15 +97,15 @@ public class cate extends AppCompatActivity {
    //  searchView=findViewById(R.id.search);
       //  gridView=findViewById(R.id.gridview);
 
-        search1=(SearchView)findViewById(R.id.search);
+        search1=(androidx.appcompat.widget.SearchView)findViewById(R.id.search);
 
 
 
 
 
-        mydb2 = new arrayListName1(this);
+
         data3=new ImageURLData3(this);
-        singleData=new singleDatabase(this);
+       // singleData=new singleDatabase(this);
 
 
 
@@ -248,7 +249,7 @@ elect.setText(nam.get(7));
 
 
 
- search1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+ search1.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
      @Override
      public boolean onQueryTextSubmit(String query) {
          return false;

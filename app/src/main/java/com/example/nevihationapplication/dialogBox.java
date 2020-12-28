@@ -1,14 +1,16 @@
 package com.example.nevihationapplication;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class dialogBox extends AppCompatDialogFragment {
     private TextView txenq;
@@ -20,9 +22,14 @@ public class dialogBox extends AppCompatDialogFragment {
     private EditText edtM;
     private EditText edtE;
     private EditText edtEx;
+    private ExampleDailogListner listner;
+
+
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater=getActivity().getLayoutInflater();
         View view=layoutInflater.inflate(R.layout.layout_dailogbox,null);
@@ -34,6 +41,11 @@ public class dialogBox extends AppCompatDialogFragment {
         }).setPositiveButton("send enquiry", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String enq=enqry.getText().toString();
+                String name=edtN.getText().toString();
+                int mobile=Integer.parseInt(edtM.getText().toString());
+                String mail=edtE.getText().toString();
+                listner.applyText(enq,name,mobile,mail);
 
             }
         });
@@ -47,5 +59,19 @@ public class dialogBox extends AppCompatDialogFragment {
         edtE=view.findViewById(R.id.edtId);
         edtEx=view.findViewById(R.id.Ex);
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listner=(ExampleDailogListner) context;
+        } catch (ClassCastException e) {
+           throw new ClassCastException(context.toString()+"Must implement ExampleDiaologListner");
+        }
+    }
+
+    public interface ExampleDailogListner{
+        void applyText(String Enquiry, String Name, int Mobile, String email );
     }
 }
