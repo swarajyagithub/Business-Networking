@@ -39,6 +39,7 @@ public class addServices extends AppCompatActivity {
     ArrayList<String> itArrayL=new ArrayList<String>();
     ArrayList<Integer> imgArrayL=new ArrayList<Integer>();
     ArrayList<String> itArrayL1=new ArrayList<String>();
+    ArrayList<String> it=new ArrayList<String>();
     private static final int GALLERY_REQUEST_CODE=123;
 
     @Override
@@ -133,7 +134,7 @@ public class addServices extends AppCompatActivity {
         if(requestCode==GALLERY_REQUEST_CODE && resultCode==RESULT_OK && data!=null)
         {
             //Code to get image from phone gallery:
-            final Uri imagedata=data.getData();
+             Uri imagedata=data.getData();
             im.setImageURI(imagedata);
             //code to convert uri into string:
             //Uri u=data.getData();
@@ -151,7 +152,7 @@ public class addServices extends AppCompatActivity {
             final String crr=cr.getSelectedItem().toString();
             final String p3=p1.getEditableText().toString();
             final String p4=p2.getEditableText().toString();
-
+            final String s=imagedata.toString();
             final String d=dis.getEditableText().toString();
             final String k=ke.getEditableText().toString();
 
@@ -160,10 +161,10 @@ public class addServices extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    final String s=imagedata.toString();
+
                     boolean r2=db.insertSData(cm,pn,ct,sct,crr,p3,p4,s,d,k);
 
-                //  boolean r3= db.insertIPData(pn,s);
+               //   boolean r2= db.insertIPData(pn,s);
                      if(r2==true)
                      {
                     Toast.makeText(getApplicationContext(),"Data Inserted",Toast.LENGTH_LONG).show();
@@ -172,10 +173,31 @@ public class addServices extends AppCompatActivity {
                        { Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
                         }
 
-                  //Sending single image via Intent.
-                  //  Intent intent=new Intent(addServices.this,service.class);
-                  //  intent.putExtra("IM",s);
-                   //   startActivity(intent);
+
+                    //Retrive image from tableNameIP
+                    //   Cursor cData=db.getIPData();
+                  //  it.clear();
+                 //   while (cData.moveToNext())
+                //    {
+                        //   String categoryName=cData.getString(1);
+                    //    String categoryImage=cData.getString(2);
+                        //arrayNameAdv.add(categoryName);
+                      //  it.add(categoryImage);
+                //    }
+                    //Set image to imageview
+                    //Code to convert string into uri
+                  //  Uri u=Uri.parse(it.get(0));
+
+                  //  ImageView i;
+                  //  i=findViewById(R.id.prdP);
+                 //   i.setImageURI(u);
+//
+
+                    //Sending single image via Intent.
+
+                //  Intent intent=new Intent(addServices.this,service.class);
+               //     intent.putExtra("G",s);
+                //     startActivity(intent);
 
 
                   //  Intent sharingIntent = new Intent(Intent.ACTION_SEND);
@@ -185,21 +207,6 @@ public class addServices extends AppCompatActivity {
                    // startActivity(Intent.createChooser(sharingIntent, "Share Image Using"));
                 }
             });
-            //Retrive image from tableNameIP
-          //  Cursor cData=db.getIPData();
-            // while (cData.moveToNext())
-            // {
-            //   String categoryName=cData.getString(1);
-             // String categoryImage=cData.getString(2);
-            //arrayNameAdv.add(categoryName);
-            //  itArrayL.add(categoryImage);
-           //  }
-            //Set image to imageview
-            //Code to convert string into uri
-            // Uri u=Uri.parse(itArrayL.get(0));
-           //  ImageView i;
-           //  i=findViewById(R.id.prdP);
-           //  i.setImageURI(u);
 
 
 

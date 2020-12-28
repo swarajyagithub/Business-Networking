@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.GridView;
-import android.widget.SearchView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class agriculture extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        dataagri=new singleDatabase(this);
+       // dataagri=new singleDatabase(this);
         searchViewAgri=findViewById(R.id.agriSearch);
         gridViewA=findViewById(R.id.gridAgri);
 
@@ -92,7 +93,7 @@ public class agriculture extends AppCompatActivity {
         adapterAgri=new AdapterAgri(itemModelAgriList,this);
         gridViewA.setAdapter(adapterAgri);
 
-        searchViewAgri.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchViewAgri.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
