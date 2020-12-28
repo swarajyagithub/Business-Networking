@@ -209,9 +209,9 @@ firebaseUser=firebaseAuth.getCurrentUser();
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // FirebaseAuth.getInstance().signOut();
-                sessionmanagement s=new sessionmanagement(getActivity());
-                s.removeSession();
+                FirebaseAuth.getInstance().signOut();
+               // sessionmanagement s=new sessionmanagement(getActivity());
+              //  s.removeSession();
                 Intent intent=new Intent(getContext(),landingPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

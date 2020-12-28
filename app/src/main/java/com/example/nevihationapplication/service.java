@@ -3,7 +3,6 @@ package com.example.nevihationapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import java.util.List;
 
 public class service extends AppCompatActivity {
     private static final int GALLERY_REQUEST_CODE = 123;
+    private static final int REQUEST_PERMISSION = 1;
     GridView g;
     AdapterService adapter;
     Button add;
@@ -47,16 +48,20 @@ public class service extends AppCompatActivity {
         curren.clear();
         ims.clear();
 
-    // db.removeS1Data();
-  //     db.removeS2Data();
+
+
+
+
+//db.removeS1Data();
+ //db.removeS2Data();
 //Receive image from activity addService.java
-        //Intent intent=getIntent();
-         //   String s=intent.getStringExtra("IM");
-          //  db.insertIPData("IMAGE",s);
-           // Cursor get=db.getIPData();
-          //  while (get.moveToNext()){
-           //     String s1=get.getString(2);
-           //     ims.add(s1);
+   //     Intent intent=getIntent();
+        //    String s=intent.getStringExtra("I");
+         //   db.insertIPData("IMAGE",s);
+        //   Cursor get=db.getIPData();
+        //   while (get.moveToNext()){
+        //       String s1=get.getString(2);
+         //     ims.add(s1);
          //   }
 
       //  Intent receiverdIntent = getIntent();
@@ -111,6 +116,8 @@ public class service extends AppCompatActivity {
         });
 
     }
+
+
     public  class AdapterService extends BaseAdapter{
 
         private List<ItemModelService> itemModelCM1List;
@@ -146,22 +153,69 @@ public class service extends AppCompatActivity {
             TextView textView2 = view.findViewById(R.id.pnS);
             TextView textView3 = view.findViewById(R.id.crS);
             TextView textView4 = view.findViewById(R.id.prS);
-            ImageView imageView=view.findViewById(R.id.imser);
+            ImageView imdone=view.findViewById(R.id.imser);
 
             textView1.setText(itemCM1Filter.get(position).getCompanyNameGS());
             textView2.setText(itemCM1Filter.get(position).getProductNameGS());
             textView3.setText(itemCM1Filter.get(position).getCurrencyGS());
             textView4.setText(itemCM1Filter.get(position).getPrizeGS());
 
-       //   Intent intent=getIntent();
-      //    String s=intent.getStringExtra("IM");
-        //    Uri u=Uri.parse(s);
+            Intent intent=new Intent();
+
+
+
+         //   List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+          //  for (ResolveInfo resolveInfo : resInfoList) {
+              //  String packageName =resolveInfo.activityInfo.packageName;
+              //  Uri uri1=Uri.parse(itemCM1Filter.get(position).getImageGS());
+             //  context.grantUriPermission(packageName, uri1, FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+          //  }
+          //  try {
+            //   ParcelFileDescriptor aa= context.getContentResolver().openFileDescriptor(Uri.parse(itemCM1Filter.get(position).getImageGS()),null);
+
+               // InputStream fileStream = new FileInputStream(aa.getFileDescriptor());
+
+               // String filename="";
+            //    Cursor returnCursor =
+                   //     getContentResolver().query(Uri.parse(itemCM1Filter.get(position).getImageGS()), null, null, null, null);
+
+             //   if (returnCursor != null) {
+
+                  //  int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+
+                //    returnCursor.moveToFirst();
+                //   filename  = returnCursor.getString(nameIndex);
+                 //   File file = new File(context.getCacheDir(), filename);
+              //      OutputStream outputStream =new FileOutputStream(file);
+                  //  IOUtils.copy(inputStream, outputStream)
+                //   imdone.setImageURI(Uri.parse(String.valueOf(file)));
+                 //  }
+              //  imdone.setImageURI(fd);
+
+               // FileInputStream inputStream = FileInputStream(aa.fd);
+        //    } catch (FileNotFoundException e) {
+        //        e.printStackTrace();
+       //     }
+
+
+          //  startActivityForResult(intent, GALLERY_KITKAT_I);
+
+
+
+        //  Intent intent=getIntent();
+      //   String s=intent.getStringExtra("G");
+
+        //   imageView.setImageURI(Uri.parse(s));
           //  imageView.setImageURI(itemCM1Filter.get(position).getImageGS());
 
-               // Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+             //   Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
           //      intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+          //  Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
+                   // android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
          //   intent.setAction(Intent.ACTION_GET_CONTENT);
-         //   intent.setType("image/*");
+           // intent.setType("image/*");
 
           //  Intent in=new Intent();
           //  in.setType("image/*");
@@ -176,12 +230,19 @@ public class service extends AppCompatActivity {
                 // Optionally, specify a URI for the file that should appear in the
                 // system file picker when it loads.
             //startActivityForResult(Intent.createChooser(intent,"Pick an image"),GALLERY_REQUEST_CODE);
-           imageView.setImageURI(Uri.parse(itemCM1Filter.get(position).getImageGS()));
-
+       // imageView.setImageURI(Uri.parse(itemCM1Filter.get(position).getImageGS()));
+//imageView.setImageURI( "content://com.android.externalstorage.documents/document/primary%3APictures%2Fr3.png");
 
             return view;
         }
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();

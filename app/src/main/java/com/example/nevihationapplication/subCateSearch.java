@@ -3,8 +3,6 @@ package com.example.nevihationapplication;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.GridView;
-import android.widget.SearchView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ public class subCateSearch extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        dataSub=new singleDatabase(this);
+
+       // dataSub=new singleDatabase(this);
 
         searchViewS=findViewById(R.id.subSearch);
         gridViewS=findViewById(R.id.gridS);

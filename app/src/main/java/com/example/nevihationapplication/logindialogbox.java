@@ -101,21 +101,15 @@ public class logindialogbox extends AppCompatDialogFragment {
 
 
 
-              // Bundle data = new Bundle();//create bundle instance
-             //   data.putString("E","Hi" );
-          //    myproileF f=new myproileF();
-           //    f.setArguments(data);
+
 
            s1=emailU.getEditableText().toString();
            s2=passworU.getEditableText().toString();
 
-//myproileF f=(myproileF) getActivity().getSupportFragmentManager().findFragmentByTag("MyProfile");
 
-//f.prName.setText(emailU.getEditableText().toString());
 
                 progressBar.setVisibility(View.VISIBLE);
-           //  boolean b=db.checkLogin(emailU.getText().toString(),passworU.getText().toString());
-           //  if(b==false) {
+
                  firebaseAuth.signInWithEmailAndPassword(emailU.getText().toString(), passworU.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                      @Override
                      public void onComplete(@NonNull Task<AuthResult> task) {
@@ -136,6 +130,8 @@ public class logindialogbox extends AppCompatDialogFragment {
                          db.updateloginpassword(emailU.getText().toString(), passworU.getText().toString());
                          if (task.isSuccessful()) {
                              Intent intent = new Intent(getContext(), home_page.class);
+                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                              startActivity(intent);
                          } else {
                              Toast.makeText(getContext(), "Invalid email or password", Toast.LENGTH_LONG).show();

@@ -2,16 +2,18 @@ package com.example.nevihationapplication;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -27,10 +29,12 @@ public class home extends Fragment {
 
     GridView gridViewPost;
     AdapterPost adapterPost;
+    AdapterComment adapterComment;
 
 
     TextView t1;
     TextView t2;
+    TextView t3;
 
     TextView ans;
 
@@ -39,6 +43,7 @@ public class home extends Fragment {
     ArrayList<String> arrayQu=new ArrayList<String>();
     ArrayList<String> arrayPost=new ArrayList<String>();
     ArrayList<String> arrayImagePost=new ArrayList<String>();
+    ArrayList<String> arrayPincode=new ArrayList<String>();
 
     ArrayList<String> arrayyear=new ArrayList<String>();
     ArrayList<String> arraymonth=new ArrayList<String>();
@@ -109,6 +114,7 @@ public class home extends Fragment {
         arrayQu.clear();
         arrayPost.clear();
         arrayImagePost.clear();
+        arrayPincode.clear();
 
 
           arrayminutes.clear();
@@ -125,21 +131,30 @@ public class home extends Fragment {
             arrayyearL.clear();
 
             arrayShowTime1.clear();
-            arrayShowTime2.clear();
+           arrayShowTime2.clear();
 
 
 
         logindialogbox l=new logindialogbox();
         String s=l.s1;
 
+        Cursor c1=db.getFirstNameNei(s);
+        while (c1.moveToNext())
+        {
+            String pincode=c1.getString(11);
+            arrayPincode.add(pincode);
+        }
 
-        Cursor cursor=db.getPosDataNei(s);
-        while (cursor.moveToNext()) {
-            String image=cursor.getString(15);
-            String Name=cursor.getString(11);
-            String qutq=cursor.getString(7);
-            String postd=cursor.getString(9);
-            String postimage=cursor.getString(8);
+
+
+        Cursor c2 = db.getPinCodeDataNei(arrayPincode.get(0));
+        while (c2.moveToNext()) {
+            String image = c2.getString(15);
+            String Name = c2.getString(11);
+            String postd = c2.getString(9);
+            String qutq=c2.getString(7);
+            String postimage = c2.getString(8);
+
             arrayImageP.add(image);
             arrayNmae.add(Name);
             arrayQu.add(qutq);
@@ -148,151 +163,141 @@ public class home extends Fragment {
 
         }
 
-        Cursor cursor2=db.getPosDataNei(s);
-          while (cursor2.moveToNext()) {
-           String year=cursor2.getString(17);
-           String month=cursor2.getString(16);
-           String date=cursor2.getString(12);
-           String hour=cursor2.getString(18);
-            String minutes=cursor2.getString(13);
-            int id=cursor2.getInt(0);
-           arrayyear.add(year);
-           arraymonth.add(month);
-           arraydate.add(date);
-            arrayhour.add(hour);
-            arrayminutes.add(minutes);
-            arrayID.add(id);
+        Cursor cursor2=db.getPinCodeDataNei(arrayPincode.get(0));
 
-          }
+            while (cursor2.moveToNext()) {
+                String year = cursor2.getString(17);
+                String month = cursor2.getString(16);
+                String date = cursor2.getString(12);
+                String hour = cursor2.getString(18);
+                String minutes = cursor2.getString(13);
+                int id = cursor2.getInt(0);
+                arrayyear.add(year);
+                arraymonth.add(month);
+                arraydate.add(date);
+                arrayhour.add(hour);
+                arrayminutes.add(minutes);
+                arrayID.add(id);
 
-         Cursor cursor1=db.getLoginDateNei(s);
-            while (cursor1.moveToNext()) {
-         String lyear=cursor1.getString(2);
-          String lmonth=cursor1.getString(3);
-           String ldate=cursor1.getString(4);
-           String lhour=cursor1.getString(6);
-           String lminutes=cursor1.getString(5);
-           arrayyearL.add(lyear);
-           arraymonthL.add(lmonth);
-           arraydateL.add(ldate);
-           arrayhourL.add(lhour);
-           arrayminutesL.add(lminutes);
-
-          }
-
-            for(int j=0;j<arrayID.size();j++){
-                int dyear=Integer.parseInt(arrayyearL.get(0))-Integer.parseInt(arrayyear.get(j));
-                    int dmonth=Integer.parseInt(arraymonthL.get(0))-Integer.parseInt(arraymonth.get(j));
-                   int ddate=Integer.parseInt(arraydateL.get(0))-Integer.parseInt(arraydate.get(j));
-                    int dhour=Integer.parseInt(arrayhourL.get(0))-Integer.parseInt(arrayhour.get(j));
-                   int dminute=Integer.parseInt(arrayminutesL.get(0))-Integer.parseInt(arrayminutes.get(j));
-
-                if(dyear==0){
-                          if(dmonth==0){
-                               if(ddate==0){
-
-                      if(dhour==0){
-                       if(dminute==0){
-                    //    T1.setText("0");
-                    //    T2.setText("minutes");
-                        //   db.insertshowTime("","");
-                           db.updateShowTime(arrayID.get(j),"0","minute");
-                       }
-                       else {
-                           if(dminute==1) {
-
-                    //       T1.setText("1");
-                    //      T2.setText("minute");
-                            //   db.insertshowTime("","");
-                               db.updateShowTime(arrayID.get(j),"1","minute");
-                       }
-                       else {
-                          String diffminutes = String.valueOf(dminute);
-                    //      T1.setText(diffminutes);
-                    //      T2.setText("minutes");
-                             //  db.insertshowTime("","");
-                               db.updateShowTime(arrayID.get(j),diffminutes,"minutes");
-                        }
-                       }
-                        }
-                        else{
-                         String diffhour = String.valueOf(dhour);
-                    //     T1.setText(diffhour);
-                    //     T2.setText("hours");
-                       //   db.insertshowTime("","");
-                          db.updateShowTime(arrayID.get(j),diffhour,"hours");
-                       }
-                       }
-                       else{
-                        if(ddate==1) {
-
-                    //      T1.setText("1");
-                    //      T2.setText("day");
-                         //   db.insertshowTime("","");
-                            db.updateShowTime(arrayID.get(j),"1","day");
-                      }else{
-                        String diffdate = String.valueOf(ddate);
-                    //    T1.setText(diffdate);
-                    //    T2.setText("days");
-                       //     db.insertshowTime("","");
-                            db.updateShowTime(arrayID.get(j),diffdate,"days");
-                        }
-                        } }
-                     else {
-                       if(dmonth==1){
-
-                    //    T1.setText("1");
-                    //    T2.setText("month");
-                         //  db.insertshowTime("","");
-                           db.updateShowTime(arrayID.get(j),"1","month");
-                               }
-                        else {
-                        String diffmonth=String.valueOf(dmonth);
-                    //     T1.setText(diffmonth);
-                    //    T2.setText("months");
-                         //  db.insertshowTime("","");
-                           db.updateShowTime(arrayID.get(j),diffmonth,"months");
-                       }
-                     }
+            }
 
 
-                      }
-                     else {
-                      if(dyear==1){
-
-                    //    T1.setText("1");
-                    //     T2.setText("year");
-                        //  db.insertshowTime("","");
-                          db.updateShowTime(arrayID.get(j),"1","year");
-                      }
-                      else {
-                        String diffyear = String.valueOf(dyear);
-                    //     T1.setText(diffyear);
-                    //     T2.setText("years");
-                     //     db.insertshowTime("","");
-                          db.updateShowTime(arrayID.get(j),diffyear,"years");
-                     }
-                     }
-
-                }
 
 
-        Cursor cursorT=db.getShowTimeData(s);
-        while (cursorT.moveToNext()) {
-            String t1=cursorT.getString(19);
-            String t2=cursorT.getString(20);
-
-           arrayShowTime1.add(t1);
-           arrayShowTime2.add(t2);
 
 
-        }
+        // Cursor cursor1=db.getLoginDateNei(s);
+       // try {
+         //   while (cursor1.moveToNext()) {
+               // String lyear = cursor1.getString(2);
+              //  String lmonth = cursor1.getString(3);
+              //  String ldate = cursor1.getString(4);
+               // String lhour = cursor1.getString(6);
+              //  String lminutes = cursor1.getString(5);
+             //   arrayyearL.add(lyear);
+              //  arraymonthL.add(lmonth);
+             //   arraydateL.add(ldate);
+             //   arrayhourL.add(lhour);
+              //  arrayminutesL.add(lminutes);
+
+           // }
+     //   }
+    //    finally {
+      //      cursor1.close();
+      //  }
+
+
+         //   for(int j=0;j<arrayID.size();j++){
+//                int dyear=Integer.parseInt(arrayyearL.get(0))-Integer.parseInt(arrayyear.get(j));
+              //      int dmonth=Integer.parseInt(arraymonthL.get(0))-Integer.parseInt(arraymonth.get(j));
+              //     int ddate=Integer.parseInt(arraydateL.get(0))-Integer.parseInt(arraydate.get(j));
+               //     int dhour=Integer.parseInt(arrayhourL.get(0))-Integer.parseInt(arrayhour.get(j));
+               //    int dminute=Integer.parseInt(arrayminutesL.get(0))-Integer.parseInt(arrayminutes.get(j));
+
+             //   if(dyear==0){
+              //            if(dmonth==0){
+              //                 if(ddate==0){
+
+                //      if(dhour==0){
+                //       if(dminute==0){
+
+               //            db.updateShowTime(arrayID.get(j),"0","minute");
+               //        }
+                //       else {
+                //           if(dminute==1) {
+
+
+                //               db.updateShowTime(arrayID.get(j),"1","minute");
+                //       }
+                //       else {
+                //          String diffminutes = String.valueOf(dminute);
+                 //              db.updateShowTime(arrayID.get(j),diffminutes,"minutes");
+                //        }
+                 //      }
+                 //       }
+                 //       else{
+                 //        String diffhour = String.valueOf(dhour);
+
+                  //        db.updateShowTime(arrayID.get(j),diffhour,"hours");
+                //       }
+                //       }
+                //       else{
+               //         if(ddate==1) {
+
+
+                //            db.updateShowTime(arrayID.get(j),"1","day");
+                 //     }else{
+                //        String diffdate = String.valueOf(ddate);
+
+                //            db.updateShowTime(arrayID.get(j),diffdate,"days");
+                //        }
+                //        } }
+                //     else {
+                 //      if(dmonth==1){
+
+
+                 //          db.updateShowTime(arrayID.get(j),"1","month");
+                //               }
+                  //      else {
+                 //       String diffmonth=String.valueOf(dmonth);
+
+                  //         db.updateShowTime(arrayID.get(j),diffmonth,"months");
+                  //     }
+                  //   }
+
+
+               //       }
+                //     else {
+                //      if(dyear==1){
+
+
+                //          db.updateShowTime(arrayID.get(j),"1","year");
+                //      }
+                //      else {
+                //        String diffyear = String.valueOf(dyear);
+               //           db.updateShowTime(arrayID.get(j),diffyear,"years");
+              //       }
+              //       }
+
+           //     }
+
+
+
+     //   Cursor cursorT=db.getShowTimeData(s);
+     //   while (cursorT.moveToNext()) {
+       //     String t1=cursorT.getString(19);
+         //   String t2=cursorT.getString(20);
+
+         //  arrayShowTime1.add(t1);
+        //   arrayShowTime2.add(t2);
+
+      //  }
 
 
         List<ItemModelPost> itemModelPoList=new ArrayList<>();
         for(int i=0;i<arrayNmae.size();i++)
         {
-            ItemModelPost itemModelPo=new ItemModelPost(arrayImageP.get(i),arrayNmae.get(i),arrayQu.get(i),arrayPost.get(i),arrayImagePost.get(i),arrayShowTime1.get(i),arrayShowTime2.get(i));
+            ItemModelPost itemModelPo=new ItemModelPost(arrayImageP.get(i),arrayNmae.get(i),arrayQu.get(i),arrayPost.get(i),arrayImagePost.get(i));
             itemModelPoList.add(itemModelPo);
 
         }
@@ -336,14 +341,22 @@ public class home extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             View view=getLayoutInflater().inflate(R.layout.post_request_item,null);
             ImageView profilpic=(ImageView)view.findViewById(R.id.pphoto);
             TextView name=(TextView)view.findViewById(R.id.name);
             TextView quotation=(TextView)view.findViewById(R.id.q);
-            TextView postrequest=(TextView)view.findViewById(R.id.post);
+            final TextView postrequest=(TextView)view.findViewById(R.id.post);
+            TextView coment=(TextView)view.findViewById(R.id.t);
+            final EditText editText=(EditText)view.findViewById(R.id.t2);
+            editText.setVisibility(View.GONE);
+            final GridView comentgrid=(GridView)view.findViewById(R.id.gridPost);
+            comentgrid.setVisibility(View.GONE);
+            final CardView c1=(CardView)view.findViewById(R.id.c);
+            c1.setVisibility(View.GONE);
             ImageView postImage=(ImageView)view.findViewById(R.id.imgpost);
-
+            final ImageView postsend=(ImageView)view.findViewById(R.id.imgsend);
+            postsend.setVisibility(View.GONE);
             TextView T1=(TextView)view.findViewById(R.id.time1);
             TextView T2=(TextView)view.findViewById(R.id.time2);;
 
@@ -354,139 +367,128 @@ public class home extends Fragment {
             logindialogbox l=new logindialogbox();
             String s=l.s1;
 
-          //  arrayminutes.clear();
-          //  arrayhour.clear();
-          //  arraydate.clear();
-          //  arraymonth.clear();
-          //  arrayyear.clear();
-
-          //  arrayminutesL.clear();
-         //   arrayhourL.clear();
-         //   arraydateL.clear();
-        //    arraymonthL.clear();
-        //    arrayyearL.clear();
-
-
-        //    Cursor cursor=db.getPosDataNei(s);
-          //  while (cursor.moveToNext()) {
-             //   String year=cursor.getString(17);
-             //   String month=cursor.getString(16);
-             //   String date=cursor.getString(12);
-             //   String hour=cursor.getString(18);
-            //    String minutes=cursor.getString(13);
-             //   arrayyear.add(year);
-             //   arraymonth.add(month);
-             //   arraydate.add(date);
-            //    arrayhour.add(hour);
-            //    arrayminutes.add(minutes);
-
-          //  }
-
-          //  Cursor cursor1=db.getLoginDateNei(s);
-        //    while (cursor1.moveToNext()) {
-              //  String lyear=cursor1.getString(2);
-              //  String lmonth=cursor1.getString(3);
-             //   String ldate=cursor1.getString(4);
-             //   String lhour=cursor1.getString(6);
-             //   String lminutes=cursor1.getString(5);
-             //   arrayyearL.add(lyear);
-             //   arraymonthL.add(lmonth);
-             //   arraydateL.add(ldate);
-             //   arrayhourL.add(lhour);
-             //   arrayminutesL.add(lminutes);
-
-          //  }
-
-           // T1.setText(arraydate.get(0));
-           // T1.setText(arraydateL.get(0));
 
 
 
-         //   int dyear=Integer.parseInt(arrayyearL.get(0))-Integer.parseInt(arrayyear.get(0));
-        //    int dmonth=Integer.parseInt(arraymonthL.get(0))-Integer.parseInt(arraymonth.get(0));
-        //   int ddate=Integer.parseInt(arraydateL.get(0))-Integer.parseInt(arraydate.get(0));
-        //    int dhour=Integer.parseInt(arrayhourL.get(0))-Integer.parseInt(arrayhour.get(0));
-         //   int dminute=Integer.parseInt(arrayminutesL.get(0))-Integer.parseInt(arrayminutes.get(0));
 
-        //   if(dyear==0){
-         //      if(dmonth==0){
-        //           if(ddate==0){
-
-                       //  if(dhour==0){
-                          //   if(dminute==0){
-                             //    T1.setText("0");
-                             //    T2.setText("minutes");
-                          //   }
-                         //    else {
-                         //        if(dminute==1) {
-
-                              //       T1.setText("1");
-                               //      T2.setText("minute");
-                              //   }
-                              //   else {
-                               //      String diffminutes = String.valueOf(dminute);
-                               //      T1.setText(diffminutes);
-                               //      T2.setText("minutes");
-                             //    }
-                          //   }
-                     //    }
-                     //    else{
-                       //      String diffhour = String.valueOf(dhour);
-                        //     T1.setText(diffhour);
-                        //     T2.setText("hours");
-                      //   }
-                //   }
-                //   else{
-                   //    if(ddate==1) {
-
-                     //      T1.setText("1");
-                     //      T2.setText("day");
-                     //  }else{
-                       //    String diffdate = String.valueOf(ddate);
-                       //    T1.setText(diffdate);
-                       //    T2.setText("days");
-                  //     }
-               //    } }
-             //  else {
-                //   if(dmonth==1){
-
-               //    T1.setText("1");
-              //    T2.setText("month");}
-               //    else {
-                  //     String diffmonth=String.valueOf(dmonth);
-                  //     T1.setText(diffmonth);
-                   //    T2.setText("months");
-               //    }
-             //  }
-
-
-         //  }
-         //  else {
-             //  if(dyear==1){
-
-               //    T1.setText("1");
-              //     T2.setText("year");
-             //  }
-             //  else {
-              //     String diffyear = String.valueOf(dyear);
-              //     T1.setText(diffyear);
-              //     T2.setText("years");
-             //  }
-          // }
-
-
-            profilpic.setImageURI(Uri.parse(itemPoFilter.get(position).getProfilepic()));
+//            profilpic.setImageURI(Uri.parse(itemPoFilter.get(position).getProfilepic()));
             name.setText(itemPoFilter.get(position).getName());
            quotation.setText(itemPoFilter.get(position).getQuotation());
             postrequest.setText(itemPoFilter.get(position).getPostdata());
-            postImage.setImageURI(Uri.parse(itemPoFilter.get(position).getPostimage()));
+//            postImage.setImageURI(Uri.parse(itemPoFilter.get(position).getPostimage()));
 
-            T1.setText(itemPoFilter.get(position).getpShowTime1());
-            T2.setText(itemPoFilter.get(position).getpShowTime2());
+         //   T1.setText(itemPoFilter.get(position).getpShowTime1());
+         //   T2.setText(itemPoFilter.get(position).getpShowTime2());
+
+            final ArrayList<String> arrayPostD=new ArrayList<String>();
+            final ArrayList<String> arrayEml=new ArrayList<String>();
+            final ArrayList<String> arrayPin=new ArrayList<String>();
+            final ArrayList<String> arrayImg=new ArrayList<String>();
+            final ArrayList<String> arrayComent=new ArrayList<String>();
+
+            arrayComent.clear();
+            arrayEml.clear();
+            arrayImg.clear();
+            arrayPin.clear();
+            arrayPostD.clear();
+
+            coment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    comentgrid.setVisibility(View.VISIBLE);
+                    editText.setVisibility(View.VISIBLE);
+                    c1.setVisibility(View.VISIBLE);
+                    postsend.setVisibility(View.VISIBLE);
+
+                    postsend.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Cursor cr=db.getPostData( postrequest.getText().toString());
+                           while (cr.moveToNext()){
+                               String postdata=cr.getString(9);
+                               String emailid=cr.getString(1);
+                               String pincode=cr.getString(14);
+                                String image=cr.getString(8);
+                                arrayEml.add(emailid);
+                               arrayImg.add(image);
+                                arrayPin.add(pincode);
+                                arrayPostD.add(postdata);
+                            }
+                           String comt=editText.getText().toString();
+                            boolean b2=db.insertCommentdata(arrayEml.get(0),arrayPin.get(0),arrayPostD.get(0),comt,arrayImg.get(0));
+                            if(b2==true)
+                            {
+                                Toast.makeText(getContext(),"Data Inserted",Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            { Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    });
+
+                    Cursor com=db.getCommentData(postrequest.getText().toString());
+                    while (com.moveToNext()){
+                        String comentdat=com.getString(4);
+                        arrayComent.add(comentdat);
+
+                    }
+
+                    List<ItemModelComment> itemModelCoList=new ArrayList<>();
+                    for(int i=0;i<arrayComent.size();i++)
+                    {
+                        ItemModelComment itemModelCo=new ItemModelComment(arrayComent.get(i));
+                        itemModelCoList.add(itemModelCo);
+
+                    }
+
+                    adapterComment= new AdapterComment(itemModelCoList,getActivity());
+                    comentgrid.setAdapter(adapterComment);
 
 
 
 
+                }
+            });
+
+
+            return view;
+        }
+    }
+    public  class AdapterComment extends BaseAdapter{
+
+        private List<ItemModelComment> itemModelCoList;
+        private  List<ItemModelComment> itemCoFilter;
+        private Context context;
+        LayoutInflater inflater;
+
+        public AdapterComment(List<ItemModelComment> itemModelCoList, Context context) {
+            this.itemModelCoList = itemModelCoList;
+            this.itemCoFilter=itemModelCoList;
+            this.context = context;
+            inflater=(LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        @Override
+        public int getCount() {
+            return itemCoFilter.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view=getLayoutInflater().inflate(R.layout.comment_data,null);
+            final TextView comtext=(TextView)view.findViewById(R.id.commenttext);
+
+            comtext.setText(itemCoFilter.get(position).getCommentData());
             return view;
         }
     }

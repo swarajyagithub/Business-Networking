@@ -124,14 +124,68 @@ android:text="1.I love"
         android:layout_marginTop="425dp"
 
         />
-    <ImageView
-        android:layout_width="30dp"
+    <TextView
+        android:layout_width="70dp"
         android:layout_height="30dp"
+       android:layout_marginLeft="160dp"
+        android:text="Comment"
+        android:id="@+id/t"
+        android:layout_marginTop="425dp"
+
+        />
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/gridPost"
+        android:layout_margin="8dp"
+        android:layout_below="@+id/t"
+        android:verticalSpacing="7dp"
+        android:numColumns="1"
+        />
+    <androidx.cardview.widget.CardView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        app:cardCornerRadius="25dp"
+        android:id="@+id/c"
+        android:layout_below="@+id/gridPost">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pphotoP"
+            android:scaleType="centerCrop"
+            android:src="@drawable/r1"/>
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border"
+        android:id="@+id/t2"
+        android:layout_below="@+id/gridPost"
+        android:layout_marginLeft="65dp"/>
+
+
+
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+android:layout_below="@+id/gridPost"
+        android:src="@drawable/sendicon"
+        android:layout_marginLeft="335dp"
+        android:id="@+id/imgsend"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginLeft="290dp"
         android:src="@drawable/rplyicon"
         android:layout_marginTop="425dp"
 
         />
+
     <TextView
         android:layout_width="20dp"
         android:layout_height="30dp"
