@@ -1,9 +1,7 @@
 package com.example.nevihationapplication;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,18 +65,7 @@ public class myneibgbhorsfrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //check if usr is logged in
-        //if loggedin move to home-page activity
-        sessionmanagement ss=new sessionmanagement(getActivity());
-        int userId= ss.getSession();
-        if(userId!=-1){
-            Intent intent=new Intent(getActivity(),home_page.class);
-            startActivity(intent);
-        }
-    }
+
 
 
     public myneibgbhorsfrag() {
@@ -251,33 +238,49 @@ public class myneibgbhorsfrag extends Fragment {
 
 
             Cursor cursor=db.getPosDataNei(s);
-            while (cursor.moveToNext()) {
-                String year=cursor.getString(17);
-                String month=cursor.getString(16);
-                String date=cursor.getString(12);
-                String hour=cursor.getString(18);
-                String minutes=cursor.getString(13);
-                arrayyear.add(year);
-                arraymonth.add(month);
-                arraydate.add(date);
-                arrayhour.add(hour);
-                arrayminutes.add(minutes);
 
+            try {
+
+
+                while (cursor.moveToNext()) {
+                    String year = cursor.getString(17);
+                    String month = cursor.getString(16);
+                    String date = cursor.getString(12);
+                    String hour = cursor.getString(18);
+                    String minutes = cursor.getString(13);
+                    arrayyear.add(year);
+                    arraymonth.add(month);
+                    arraydate.add(date);
+                    arrayhour.add(hour);
+                    arrayminutes.add(minutes);
+
+
+                }
+            }
+            finally {
+
+                    cursor.close();
             }
 
             Cursor cursor1=db.getLoginDateNei(s);
-            while (cursor1.moveToNext()) {
-                String lyear=cursor1.getString(2);
-                String lmonth=cursor1.getString(3);
-                String ldate=cursor1.getString(4);
-                String lhour=cursor1.getString(6);
-                String lminutes=cursor1.getString(5);
-                arrayyearL.add(lyear);
-                arraymonthL.add(lmonth);
-                arraydateL.add(ldate);
-                arrayhourL.add(lhour);
-                arrayminutesL.add(lminutes);
+            try {
+                while (cursor1.moveToNext()) {
+                    String lyear = cursor1.getString(2);
+                    String lmonth = cursor1.getString(3);
+                    String ldate = cursor1.getString(4);
+                    String lhour = cursor1.getString(6);
+                    String lminutes = cursor1.getString(5);
+                    arrayyearL.add(lyear);
+                    arraymonthL.add(lmonth);
+                    arraydateL.add(ldate);
+                    arrayhourL.add(lhour);
+                    arrayminutesL.add(lminutes);
 
+
+                }
+            }
+            finally {
+                cursor1.close();
             }
 
             // T1.setText(arraydate.get(0));
@@ -361,10 +364,10 @@ public class myneibgbhorsfrag extends Fragment {
             TextView name=(TextView)view.findViewById(R.id.nameN);
             TextView postrequest=(TextView)view.findViewById(R.id.postN);
             ImageView postImage=(ImageView)view.findViewById(R.id.imgpostN);
-            profilpic.setImageURI(Uri.parse(itemPoNFilter.get(position).getProfilepicN()));
+        //   profilpic.setImageURI(Uri.parse(itemPoNFilter.get(position).getProfilepicN()));
             name.setText(itemPoNFilter.get(position).getNamN());
             postrequest.setText(itemPoNFilter.get(position).getPostdataN());
-            postImage.setImageURI(Uri.parse(itemPoNFilter.get(position).getPostimageN()));
+//            postImage.setImageURI(Uri.parse(itemPoNFilter.get(position).getPostimageN()));
             return view;
         }
     }
